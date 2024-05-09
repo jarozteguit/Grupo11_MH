@@ -2,6 +2,7 @@ package com.example.grupo11;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,9 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -47,12 +51,13 @@ public class MainActivity extends AppCompatActivity {
     private EditText angleEditText;
     private ToggleButton modeToggleButton;
     private Button rotateButton;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private static final String BASE_URL_ANGLE = "http://192.168.4.1/?angle=";
     private static final String BASE_URL_SENSOR = "http://192.168.4.1/?sensor1";
     private static final String BASE_URL_SENSOR_2 = "http://192.168.4.1/?sensor2";
     private static final String BASE_URL_AUTO = "http://192.168.4.1/?auto";
     private static final String BASE_URL_MANUAL = "http://192.168.4.1/?manual";
-    private static final String BASE_URL_CODIF = "http://192.168.4.1/?codif";
+    private static final String BASE_URL_CODIF = "http://192.168.4.3/?codif";
     private static final String BASE_URL_VEL1 = "http://192.168.4.1/?vel1";
     private static final String BASE_URL_VEL2 = "http://192.168.4.1/?vel2";
 
@@ -60,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(this::restartApp);
 
         angleEditText = findViewById(R.id.angleEditText);
         modeToggleButton = findViewById(R.id.modeToggleButton);
@@ -103,6 +110,12 @@ public class MainActivity extends AppCompatActivity {
         dataReceiverTask.fetchDataFromServer(); // Start fetching data
     }
 
+    private void restartApp() {
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+    }
+
     private void sendRotation(final int angle) {
         try {
             String encodedAngle = URLEncoder.encode(String.valueOf(angle), "UTF-8");
@@ -138,6 +151,8 @@ public class MainActivity extends AppCompatActivity {
                         // Handle HTTP error
                         runOnUiThread(() -> Toast.makeText(MainActivity.this, "Failed to send rotation command. HTTP error code: " + responseCode, Toast.LENGTH_SHORT).show());
                     }
+                    // Close connection
+                    connection.disconnect();
                 } catch (IOException e) {
                     e.printStackTrace();
                     // Handle IO error
@@ -202,6 +217,8 @@ public class MainActivity extends AppCompatActivity {
                     Log.e(TAG, "Unexpected response content: " + response);
                     // Handle unexpected response content
                 }
+                // Close connection
+                connection.disconnect();
             } catch (IOException e) {
                 // Handle error
                 Log.e(TAG, "Failed to activate auto mode: " + e.getMessage());
@@ -243,6 +260,8 @@ public class MainActivity extends AppCompatActivity {
                     Log.e(TAG, "Failed to switch to manual mode. HTTP error code: " + responseCode);
                     // Handle HTTP error
                 }
+                // Close connection
+                connection.disconnect();
             } catch (IOException e) {
                 Log.e(TAG, "Failed to switch to manual mode: " + e.getMessage());
                 // Handle error
@@ -297,6 +316,8 @@ public class MainActivity extends AppCompatActivity {
                     // Handle HTTP error
                     runOnUiThread(() -> Toast.makeText(MainActivity.this, "Failed to send velocity command. HTTP error code: " + responseCode, Toast.LENGTH_SHORT).show());
                 }
+                // Close connection
+                connection.disconnect();
             } catch (IOException e) {
                 e.printStackTrace();
                 // Handle IO error
