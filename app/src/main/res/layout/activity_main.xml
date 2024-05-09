@@ -1,172 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="24dp"
-        android:layout_marginStart="20dp"
-        android:layout_centerHorizontal="true">
-
-        <TextView
-            android:id="@+id/infoTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Motor control: "
-            android:textStyle="bold"
-            android:textSize="24sp"
-            tools:ignore="HardcodedText" />
-
-        <EditText
-            android:id="@+id/angleEditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:autofillHints="number"
-            android:hint="(grados a girar)"
-            android:inputType="number|numberSigned"
-            android:minHeight="48dp"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:id="@+id/rotateButton"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:text="Rotar"
-            android:layout_marginStart="8dp"
-            tools:ignore="HardcodedText" />
-
-    </LinearLayout>
-
-
-    <ToggleButton
-        android:id="@+id/modeToggleButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/linearLayout"
-        android:layout_marginTop="16dp"
-        android:layout_centerHorizontal="true"
-        android:textOff="Manual"
-        android:textOn="Auto"
-        tools:ignore="HardcodedText" />
-    <TextView
-        android:id="@+id/infoSensor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/modeToggleButton"
-        android:orientation="horizontal"
-        android:layout_marginStart="10dp"
-        android:text="Desplazamiento Seguidores: "
-        android:textStyle="bold"
-        android:textSize="24sp"
-        tools:ignore="HardcodedText" />
-
-    <LinearLayout
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_below="@id/infoSensor">
+        tools:context=".MainActivity">
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="50dp"
             android:orientation="horizontal"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="5dp">
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="20dp"
+            android:layout_centerHorizontal="true">
 
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/lineChart"
+            <TextView
+                android:id="@+id/infoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Motor control: "
+                android:textStyle="bold"
+                android:textSize="24sp"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/angleEditText"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                tools:ignore="NestedWeights" />
+                android:autofillHints="number"
+                android:hint="(grados a girar)"
+                android:inputType="number|numberSigned"
+                android:minHeight="48dp"
+                tools:ignore="HardcodedText" />
 
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/lineChart1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+            <Button
+                android:id="@+id/rotateButton"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="Rotar"
+                android:layout_marginStart="8dp"
+                tools:ignore="HardcodedText" />
+
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/infoMotor"
+
+        <ToggleButton
+            android:id="@+id/modeToggleButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/linearLayout"
+            android:layout_marginTop="16dp"
+            android:layout_centerHorizontal="true"
+            android:textOff="Manual"
+            android:textOn="Auto"
+            tools:ignore="HardcodedText" />
+        <TextView
+            android:id="@+id/infoSensor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/modeToggleButton"
             android:orientation="horizontal"
             android:layout_marginStart="10dp"
-            android:text="Rotación motor: "
+            android:text="Desplazamiento Seguidores: "
             android:textStyle="bold"
             android:textSize="24sp"
             tools:ignore="HardcodedText" />
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_below="@id/infoSensor">
 
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/lineChart2"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                tools:ignore="NestedWeights" />
-
-            <!-- Layout for velocity buttons and display -->
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:gravity="center">
+                android:layout_marginBottom="5dp">
 
-                <!-- Buttons to switch between predefined velocities -->
-                <Button
-                    android:id="@+id/velocity1Button"
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/lineChart"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    tools:ignore="NestedWeights" />
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/lineChart1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/infoMotor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="10dp"
+                android:text="Rotación motor: "
+                android:textStyle="bold"
+                android:textSize="24sp"
+                tools:ignore="HardcodedText" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp">
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/lineChart2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    tools:ignore="NestedWeights" />
+
+                <!-- Layout for velocity buttons and display -->
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Velocidad 1"
-                    android:textSize="20sp"
-                    android:layout_marginBottom="5dp"
-                    tools:ignore="HardcodedText" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:gravity="center">
 
-                <Button
-                    android:id="@+id/velocity2Button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Velocidad 2"
-                    android:textSize="20sp"
-                    android:layout_marginBottom="5dp"
-                    tools:ignore="HardcodedText" />
+                    <!-- Buttons to switch between predefined velocities -->
+                    <Button
+                        android:id="@+id/velocity1Button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Velocidad 1"
+                        android:textSize="20sp"
+                        android:layout_marginBottom="5dp"
+                        tools:ignore="HardcodedText" />
 
-                <!-- TextView to display selected velocity -->
-                <TextView
-                    android:id="@+id/sensorVelocityTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:text="Lectura velocidad sensor: "
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:layout_marginBottom="5dp"
-                    android:maxLines="2"
-                    tools:ignore="HardcodedText" />
+                    <Button
+                        android:id="@+id/velocity2Button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Velocidad 2"
+                        android:textSize="20sp"
+                        android:layout_marginBottom="5dp"
+                        tools:ignore="HardcodedText" />
+
+                    <!-- TextView to display selected velocity -->
+                    <TextView
+                        android:id="@+id/sensorVelocityTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:text="Lectura velocidad sensor: "
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:layout_marginBottom="5dp"
+                        android:maxLines="2"
+                        tools:ignore="HardcodedText" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 
-</RelativeLayout>
-
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
